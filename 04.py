@@ -8,9 +8,9 @@ indices = map(lambda x: x - 1, indices)
 
 dictionary = {}
 for i, word in enumerate(sentences.split()):
-  if i in indices:
-    dictionary[word[:1]] = i + 1
-  else:
-    dictionary[word[:2]] = i + 1
+    if i in indices:
+        dictionary[word[:1]] = i + 1
+    else:
+        dictionary[word[:2]] = i + 1
 
 print(dictionary)
