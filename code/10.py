@@ -11,8 +11,9 @@ def lines(filename):
 class TestCase(unittest.TestCase):
 
     def test(self):
-        actual = lines(os.path.join('..', 'data', 'hightemp.txt'))
-        expected = int(subprocess.check_output(['wc', '-l', os.path.join('..', 'data', 'hightemp.txt')]).split()[0])
+        filename = os.path.join('..', 'data', 'hightemp.txt')
+        actual = lines(filename)
+        expected = int(subprocess.check_output(['wc', '-l', filename]).split()[0])
         self.assertEqual(actual, expected)
 
 if __name__ == '__main__':
