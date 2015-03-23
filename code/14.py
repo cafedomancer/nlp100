@@ -8,8 +8,8 @@ from mock import Mock
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'data')
 
-def head(filenames, n = 10):
-    with open(filenames) as f:
+def head(filename, n = 10):
+    with open(filename) as f:
         return ''.join(f.readlines()[:n])
 
 class TestCase(unittest.TestCase):

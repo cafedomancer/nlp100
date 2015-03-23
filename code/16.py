@@ -8,8 +8,8 @@ from mock import Mock
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'data')
 
-def split(filenames, n = 10):
-    with open(filenames) as f:
+def split(filename, n = 10):
+    with open(filename) as f:
         lines = f.readlines()
     return [''.join(lines[i:i + n]) for i in range(0, len(lines), n)]
 
