@@ -11,7 +11,7 @@ def tab_to_space(filename):
 class TestCase(unittest.TestCase):
 
     def setUp(self):
-        self.filename = os.path.join('..', 'data', 'hightemp.txt')
+        self.filename = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'data', 'hightemp.txt')
 
     def test_tab_to_space_with_sed(self):
         actual = tab_to_space(self.filename)
