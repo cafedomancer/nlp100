@@ -3,7 +3,7 @@
 import unittest
 
 def zipped(first, second):
-    return ''.join([''.join(t) for t in zip(first, second)])
+    return ''.join(sum(zip(first, second), ()))
 
 class TestCase(unittest.TestCase):
 
