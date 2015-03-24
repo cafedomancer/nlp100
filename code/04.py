@@ -2,9 +2,9 @@ import re
 import unittest
 
 
-def sliced_string(i, w):
+def sliced_string(index, word):
     indices = [1, 5, 6, 7, 8, 9, 15, 16, 19]
-    return w[:1] if i in indices else w[:2]
+    return word[:1] if index in indices else word[:2]
 
 
 def chemical_symbols(string):
