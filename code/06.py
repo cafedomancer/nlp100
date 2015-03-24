@@ -2,7 +2,7 @@ import unittest
 
 
 def ngram(sequence, n):
-    return zip(*(sequence[i:] for i in range(n)))
+    return list(zip(*(sequence[i:] for i in range(n))))
 
 
 def union(x, y):
