@@ -1,12 +1,14 @@
-# -*- coding: utf-8 -*-
-
 import re
 import unittest
 
+
+def shift(matchobj):
+    return chr(219 - ord(matchobj.group(0)))
+
+
 def cipher(string):
-    def shift(matchobj):
-        return chr(219 - ord(matchobj.group(0)))
-    return re.sub(r'[a-z]', shift, string)
+    return re.sub('[a-z]', shift, string)
+
 
 class TestCase(unittest.TestCase):
 
@@ -22,6 +24,7 @@ class TestCase(unittest.TestCase):
         actual = cipher(cipher(self.string))
         expected = self.string
         self.assertEqual(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
