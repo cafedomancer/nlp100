@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import unittest
 
 def reversed(string):
@@ -7,7 +5,7 @@ def reversed(string):
 
 class TestCase(unittest.TestCase):
 
-    def test(self):
+    def test_reversed(self):
         actual = reversed('stressed')
         expected = 'desserts'
         self.assertEqual(actual, expected)
