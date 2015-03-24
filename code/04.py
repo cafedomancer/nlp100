@@ -2,11 +2,14 @@ import re
 import unittest
 
 
-def chemical_symbols(string):
+def sliced_string(i, w):
     indices = [1, 5, 6, 7, 8, 9, 15, 16, 19]
-    sliced = lambda i, w: w[:1] if i in indices else w[:2]
+    return w[:1] if i in indices else w[:2]
+
+
+def chemical_symbols(string):
     words = filter(None, re.split('\W+', string))
-    return {sliced(i, w): i for i, w in enumerate(words, start=1)}
+    return {sliced_string(i, w): i for i, w in enumerate(words, start=1)}
 
 
 class TestCase(unittest.TestCase):
