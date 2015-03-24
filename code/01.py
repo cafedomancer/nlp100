@@ -1,16 +1,17 @@
-# -*- coding: utf-8 -*-
-
 import unittest
 
-def odd(string):
+
+def odd_numbered_characters(string):
     return string[::2]
+
 
 class TestCase(unittest.TestCase):
 
-    def test(self):
-        actual = odd(u'パタトクカシーー')
-        expected = u'パトカー'
+    def test_odd_numbered_characters(self):
+        actual = odd_numbered_characters('パタトクカシーー')
+        expected = 'パトカー'
         self.assertEqual(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
