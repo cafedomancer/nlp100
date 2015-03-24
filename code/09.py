@@ -21,7 +21,7 @@ def typoglycemia(string):
 
 class TestCase(unittest.TestCase):
 
-    def test(self):
+    def test_typoglycemia(self):
         actual = typoglycemia((
             "I couldn't believe that I could actually understand what "
             "I was reading : the phenomenal power of the human mind ."))
