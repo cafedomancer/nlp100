@@ -5,13 +5,13 @@ import unittest
 from itertools import islice
 
 
-def last_lines(stdin, n=10):
+def last_lines(stdin, n):
     nlines = sum(1 for _ in stdin)
     stdin.seek(0)
     return ''.join(islice(stdin, nlines - n, nlines))
 
 
-def last_lines_with_tail(filepath, n=10):
+def last_lines_with_tail(filepath, n):
     output = subprocess.check_output(
         'tail -n {} {}'.format(n, filepath), shell=True)
     return output.decode()

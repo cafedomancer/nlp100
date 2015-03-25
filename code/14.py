@@ -5,11 +5,11 @@ import unittest
 from itertools import islice
 
 
-def first_lines(stdin, n=10):
+def first_lines(stdin, n):
     return ''.join(islice(stdin, n))
 
 
-def first_lines_with_head(filepath, n=10):
+def first_lines_with_head(filepath, n):
     output = subprocess.check_output(
         'head -n {} {}'.format(n, filepath), shell=True)
     return output.decode()
