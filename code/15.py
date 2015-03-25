@@ -1,28 +1,41 @@
-# -*- coding: utf-8 -*-
-
 import os
 import subprocess
 import unittest
 
-from mock import Mock
+from itertools import islice
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'data')
 
-def tail(filename, n = 10):
-    with open(filename) as f:
-        return ''.join(f.readlines()[-n:])
+def last_lines(stdin, n=10):
+    nlines = sum(1 for _ in stdin)
+    stdin.seek(0)
+    return ''.join(islice(stdin, nlines - n, nlines))
+
+
+def last_lines_with_tail(filepath, n=10):
+    output = subprocess.check_output(
+        'tail -n {} {}'.format(n, filepath), shell=True)
+    return output.decode()
+
 
 class TestCase(unittest.TestCase):
 
     def setUp(self):
-        sys = Mock(argv=[__file__, 10])
-        self.n = sys.argv[1]
-        self.filename = os.path.join(DATA_DIR, 'hightemp.txt')
+        self.filepath = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            os.pardir,
+            'data',
+            'hightemp.txt')
+        self.mock_stdin = open(self.filepath)
+        self.mock_argv = [__file__, 5]
 
-    def test(self):
-        actual = tail(self.filename, self.n)
-        expected = subprocess.check_output('tail {}'.format(self.filename), shell=True)
+    def tearDown(self):
+        self.mock_stdin.close()
+
+    def test_last_lines(self):
+        actual = last_lines(self.mock_stdin, self.mock_argv[1])
+        expected = last_lines_with_tail(self.filepath, self.mock_argv[1])
         self.assertEqual(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
