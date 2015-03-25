@@ -1,28 +1,39 @@
-# -*- coding: utf-8 -*-
-
 import os
 import subprocess
 import unittest
 
-from mock import Mock
+from itertools import islice
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'data')
 
-def head(filename, n = 10):
-    with open(filename) as f:
-        return ''.join(f.readlines()[:n])
+def first_lines(stdin, n=10):
+    return ''.join(islice(stdin, n))
+
+
+def first_lines_with_head(filepath, n=10):
+    output = subprocess.check_output(
+        'head -n {} {}'.format(n, filepath), shell=True)
+    return output.decode()
+
 
 class TestCase(unittest.TestCase):
 
     def setUp(self):
-        sys = Mock(argv=[__file__, 10])
-        self.n = sys.argv[1]
-        self.filename = os.path.join(DATA_DIR, 'hightemp.txt')
+        self.filepath = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            os.pardir,
+            'data',
+            'hightemp.txt')
+        self.mock_stdin = open(self.filepath)
+        self.mock_argv = [__file__, 5]
 
-    def test(self):
-        actual = head(self.filename, self.n)
-        expected = subprocess.check_output('head {}'.format(self.filename), shell=True)
+    def tearDown(self):
+        self.mock_stdin.close()
+
+    def test_first_lines(self):
+        actual = first_lines(self.mock_stdin, self.mock_argv[1])
+        expected = first_lines_with_head(self.filepath, self.mock_argv[1])
         self.assertEqual(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
