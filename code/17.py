@@ -1,25 +1,36 @@
-# -*- coding: utf-8 -*-
-
 import os
 import subprocess
 import unittest
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'data')
 
-def first_column_difference(filename):
-    with open(filename) as f:
-        first = [r.split()[0] for r in f.readlines()]
-    return '\n'.join(sorted(set(first))) + '\n'
+def first_column_set(stdin):
+    return ''.join(sorted(set(line.split()[0] + '\n' for line in stdin)))
+
+
+def first_column_set_with_unix_commands(filepath):
+    output = subprocess.check_output(
+            'cut -f 1 {} | LC_ALL=C sort | uniq'.format(filepath), shell=True)
+    return output.decode()
+
 
 class TestCase(unittest.TestCase):
 
     def setUp(self):
-        self.filename = os.path.join(DATA_DIR, 'hightemp.txt')
+        self.filepath = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            os.pardir,
+            'data',
+            'hightemp.txt')
+        self.mock_stdin = open(self.filepath)
 
-    def test(self):
-        actual = first_column_difference(self.filename)
-        expected = subprocess.check_output('cut -f 1 {} | LC_ALL=C sort | uniq'.format(self.filename), shell=True)
+    def tearDown(self):
+        self.mock_stdin.close()
+
+    def test_first_column_set(self):
+        actual = first_column_set(self.mock_stdin)
+        expected = first_column_set_with_unix_commands(self.filepath)
         self.assertEqual(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
