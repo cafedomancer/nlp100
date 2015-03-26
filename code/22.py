@@ -14,8 +14,7 @@ def united_kingdom(filepath):
 
 
 def category_names(text):
-    result = re.findall('\[\[Category:(.+?)(?:\|.+?)?\]\]', text)
-    return result
+    return re.findall('\[\[Category:(.+?)(?:\|.+?)?\]\]', text)
 
 
 class TestCase(unittest.TestCase):
