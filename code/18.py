@@ -12,7 +12,7 @@ def sorted_by_third_column(stdin):
 
 def sorted_by_third_column_with_sort(filepath):
     output = subprocess.check_output(
-            'LC_ALL=C sort -k 3 -n -r -s {}'.format(filepath), shell=True)
+        'LC_ALL=C sort -k 3 -n -r -s {}'.format(filepath), shell=True)
     return output.decode()
 
 

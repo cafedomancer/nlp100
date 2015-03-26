@@ -10,7 +10,7 @@ def merge_files(first, second):
 
 def merge_files_with_paste(first, second):
     output = subprocess.check_output(
-            'paste {} {}'.format(first, second), shell=True)
+        'paste {} {}'.format(first, second), shell=True)
     return output.decode()
 
 

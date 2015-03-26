@@ -9,7 +9,7 @@ def first_column_set(stdin):
 
 def first_column_set_with_unix_commands(filepath):
     output = subprocess.check_output(
-            'cut -f 1 {} | LC_ALL=C sort | uniq'.format(filepath), shell=True)
+        'cut -f 1 {} | LC_ALL=C sort | uniq'.format(filepath), shell=True)
     return output.decode()
 
 
