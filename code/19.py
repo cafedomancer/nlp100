@@ -6,7 +6,7 @@ from collections import defaultdict
 
 
 def sorted_word_frequency_of_first_column(stdin):
-    firsts = [line.split()[0] for line in stdin]
+    firsts = (line.split()[0] for line in stdin)
     freq = defaultdict(int)
     for word in firsts:
         freq[word] += 1
