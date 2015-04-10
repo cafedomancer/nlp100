@@ -4,8 +4,6 @@ import os
 import re
 import unittest
 
-from pprint import pprint as pp
-
 
 def united_kingdom(filepath):
     with gzip.open(filepath, 'rt') as data:
