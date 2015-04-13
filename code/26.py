@@ -13,7 +13,7 @@ def united_kingdom(filepath):
                 return article['text']
 
 
-def infobox(text):
+def infobox_without_emphasis(text):
     return dict([[key, re.sub("'{2,3}|'{5}", '', value)]
                  for key, value in re.findall('\|(.*?) = (.*)', text)])
 
@@ -28,8 +28,8 @@ class TestCase(unittest.TestCase):
             'jawiki-country.json.gz')
         self.text = united_kingdom(self.filepath)
 
-    def test_infobox(self):
-        actual = infobox(self.text)
+    def test_infobox_without_emphasis(self):
+        actual = infobox_without_emphasis(self.text)
         expected = {'略名': 'イギリス',
                     '日本語国名': 'グレートブリテン及び北アイルランド連合王国',
                     '公式国名': ('{{lang|en|United Kingdom of Great Britain '
